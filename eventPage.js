@@ -2,7 +2,7 @@ var menuItem = {
 	"id": "stop-list",
 	"title": "Open without playlist",
 	"contexts": ["link"],
-	"targetUrlPatterns": ["*://*.youtube.com/*&list=*", "*://*.youtube.com/*&video_ids=*"]
+	"targetUrlPatterns": ["*://*.youtube.com/*list=*", "*://*.youtube.com/watch_videos*video_ids=*"]
 }
 chrome.contextMenus.create(menuItem);
 
