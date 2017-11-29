@@ -1,6 +1,6 @@
 var menuItem = {
-	"id": "testing",
-	"title": "testing",
+	"id": "stop-list",
+	"title": "Open without playlist",
 	"contexts": ["link"],
 	"targetUrlPatterns": ["*://*.youtube.com/*&list=*", "*://*.youtube.com/*&video_ids=*"]
 }
