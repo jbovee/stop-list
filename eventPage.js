@@ -26,7 +26,7 @@ function getUrlParams(url, callback) {
 function craftUrl(paramsJson) {
 	var finalURL = "https://www.youtube.com/watch?v=";
 	if (paramsJson["video_ids"]) {
-		var index = (paramsJson["index"]) ? paramsJson["index"] : 0;
+		var index = (paramsJson["index"]) ? paramsJson["index"] - 1 : 0;
 		finalURL += paramsJson["video_ids"][index];
 	} else if (paramsJson["list"]) {
 		finalURL += paramsJson["v"];
