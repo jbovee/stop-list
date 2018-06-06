@@ -2,7 +2,11 @@
 	"manifest_version": 2,
 	"name": "Stop List",
 	"description": "Open a YouTube playlist in a new tab, removing the playlist part of the url.",
-	"version": "1.2",
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": false
+	},
+	"version": "1.3",
 
 	"background": {
 		"scripts": ["eventPage.js"],
@@ -17,6 +21,7 @@
 	},
 	"permissions": [
 		"contextMenus",
+		"storage",
 		"tabs"
 	]
 }

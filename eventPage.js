@@ -7,11 +7,13 @@ var menuItem = {
 chrome.contextMenus.create(menuItem);
 
 chrome.contextMenus.onClicked.addListener(function(clickData) {
-	var newUrl = getUrlParams(clickData.linkUrl, craftUrl);
-	chrome.tabs.create({"url": newUrl});
+	chrome.storage.local.get(['startIndex'], function(result) {
+		var newUrl = getUrlParams(clickData.linkUrl, result.startIndex, craftUrl)
+		chrome.tabs.create({"url": newUrl});
+	});
 });
 
-function getUrlParams(url, callback) {
+function getUrlParams(url, sIndex, callback) {
 	var extra = url.split('?')[1],
 		args = extra.split('&'),
 		argsJSON = {};
@@ -20,13 +22,13 @@ function getUrlParams(url, callback) {
 			value = (key == "video_ids") ? arg.split('=')[1].split('%2C') : arg.split('=')[1];
 		argsJSON[key] = value;
 	});
-	return callback(argsJSON);
+	return callback(argsJSON, sIndex);
 }
 
-function craftUrl(paramsJson) {
+function craftUrl(paramsJson, sIndex) {
 	var finalURL = "https://www.youtube.com/watch?v=";
 	if (paramsJson["video_ids"]) {
-		var index = (paramsJson["index"]) ? paramsJson["index"] - 1 : 0;
+		var index = (paramsJson["index"]) ? paramsJson["index"] - sIndex : 0;
 		finalURL += paramsJson["video_ids"][index];
 	} else if (paramsJson["list"]) {
 		finalURL += paramsJson["v"];
