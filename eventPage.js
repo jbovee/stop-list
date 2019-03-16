@@ -1,3 +1,12 @@
+chrome.runtime.onInstalled.addListener(details => {
+	if (details.reason === "install") {
+		chrome.storage.local.set({
+			startIndex: 0,
+			tabFocus: true,
+		});
+	}
+});
+
 var menuItem = {
 	"id": "stop-list",
 	"title": "Open without playlist",
@@ -7,9 +16,9 @@ var menuItem = {
 chrome.contextMenus.create(menuItem);
 
 chrome.contextMenus.onClicked.addListener(function(clickData) {
-	chrome.storage.local.get(['startIndex'], function(result) {
+	chrome.storage.local.get(['startIndex','tabFocus'], function(result) {
 		var newUrl = getUrlParams(clickData.linkUrl, result.startIndex, craftUrl)
-		chrome.tabs.create({"url": newUrl});
+		chrome.tabs.create({"url": newUrl, "active": result.tabFocus});
 	});
 });
 
